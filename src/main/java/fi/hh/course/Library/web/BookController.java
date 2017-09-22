@@ -20,7 +20,7 @@ import fi.hh.course.Library.domain.BookRepository;
 
 public class BookController {
 	@Autowired BookRepository repository;
-	
+
 	public void doSomething(){
 		
 	}	
@@ -47,7 +47,7 @@ public class BookController {
 		repository.delete(id);
 		return "redirect:../booklist";
 	}
-	@RequestMapping(value = "/edit/){id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBook(@PathVariable("id") Long id,Model model){
 		model.addAttribute("book",repository.findOne(id));
 		return "editbook";

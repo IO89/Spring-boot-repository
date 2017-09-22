@@ -1,8 +1,5 @@
 package fi.hh.course.Library.domain;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -15,9 +12,9 @@ public class Book {
 	private int year;
 	private String isbn;
 	private double price;
-	
-	public Book(){}
-	
+
+
+
 	public Book(String title, String author, int year, String isbn, double price) {
 		super();
 		this.title = title;
@@ -28,6 +25,11 @@ public class Book {
 	
 	
 	}
+
+	public Book() {
+		
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -64,6 +66,8 @@ public class Book {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	@Override
 	public String toString(){

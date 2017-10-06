@@ -8,10 +8,7 @@ import fi.hh.course.Library.domain.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 import fi.hh.course.Library.domain.Book;
@@ -57,6 +54,14 @@ public class BookController {
 		model.addAttribute("book",repository.findOne(id));
 		model.addAttribute("category", categoryRepository.findAll());
 		return "editbook";
+	}
+	@RequestMapping(value = "/books",method = RequestMethod.GET)
+	public @ResponseBody List<Book> bookListREST(){
+		return (List<Book>)repository.findAll();
+	}
+	@RequestMapping(value = "/book/{id}",method = RequestMethod.GET)
+	public @ResponseBody Book findBookREST(@PathVariable("id") Long bookId){
+		return repository.findOne(bookId);
 	}
 
 

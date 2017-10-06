@@ -18,7 +18,8 @@ public class Book {
 
 
 	@ManyToOne
-	@JoinColumn (name = "categoryId")
+    @JsonIgnore
+    @JoinColumn (name = "categoryId")
 	private Category category;
 
 	public Book() {}
@@ -33,8 +34,8 @@ public class Book {
 		this.category = category ;
 	}
 
-	public long getId() {
-		return id;
+    public Long getId() {
+        return id;
 	}
 
 	public String getTitle() {
@@ -85,6 +86,10 @@ public class Book {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 	@Override
 	public String toString(){

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>BookList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -33,7 +33,7 @@
         <div style="clear: both;display: block;height: 10px;"></div>
         <label for="category">Category</label>
         <select id="category" th:field="*{category}" >
-            <option th:each="category: ${categories}"
+            <option th:each="category: ${category}"
                     th:value="${category.categoryId}"
                     th:text="${category.categoryName}"></option>
         </select>

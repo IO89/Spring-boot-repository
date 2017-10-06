@@ -3,6 +3,7 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import fi.hh.course.Library.domain.Category;
 import fi.hh.course.Library.domain.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,7 @@ public class BookController {
 	@RequestMapping(value= "/addbook")
 	public String addBook(Model model){
 		model.addAttribute("book",new Book());
+		model.addAttribute("category", categoryRepository.findAll());
 		return "addbook";
 	}
 	@RequestMapping (value ="/save",method = RequestMethod.POST)
@@ -46,11 +48,14 @@ public class BookController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long id, Model model){
 		repository.delete(id);
+		System.out.println("delete" + id);
 		return "redirect:../booklist";
+
 	}
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBook(@PathVariable("id") Long id,Model model){
 		model.addAttribute("book",repository.findOne(id));
+		model.addAttribute("category", categoryRepository.findAll());
 		return "editbook";
 	}
 

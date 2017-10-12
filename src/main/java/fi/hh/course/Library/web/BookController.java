@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import fi.hh.course.Library.domain.Category;
 import fi.hh.course.Library.domain.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,12 +32,15 @@ public class BookController {
 		return "booklist";
 	}
 
-	@RequestMapping(value= "/addbook")
-	public String addBook(Model model){
+    //Authorization
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @RequestMapping(value = "/addbook")
+    public String addBook(Model model){
 		model.addAttribute("book",new Book());
-		model.addAttribute("category", categoryRepository.findAll());
-		return "addbook";
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "addbook";
 	}
+
 	@RequestMapping (value ="/save",method = RequestMethod.POST)
 	public String saveBook (Book book){
 		repository.save(book);
@@ -49,12 +53,14 @@ public class BookController {
 		return "redirect:../booklist";
 
 	}
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String editBook(@PathVariable("id") Long id,Model model){
-		model.addAttribute("book",repository.findOne(id));
-		model.addAttribute("category", categoryRepository.findAll());
-		return "editbook";
-	}
+
+    //Adding restful service
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editBook(@PathVariable("id") Long id, Model model){
+        model.addAttribute("book",repository.findOne(id));
+        model.addAttribute("category", categoryRepository.findAll());
+        return "editbook";
+    }
 	@RequestMapping(value = "/books",method = RequestMethod.GET)
 	public @ResponseBody List<Book> bookListREST(){
 		return (List<Book>)repository.findAll();
@@ -64,6 +70,11 @@ public class BookController {
 		return repository.findOne(bookId);
 	}
 
+    //Adiing Login to Controller
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
 
 
 }

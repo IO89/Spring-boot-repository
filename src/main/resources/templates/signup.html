@@ -9,16 +9,16 @@
 <div class="col-md-4">
     <form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
         <div>
-            <label>Username : <input type="text" th:field="*{username}" class="form-control"></label>
+            <label>Username : <input type="text" th:field="*{username}" class="form-control"/></label>
             <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ivalid username</p>
         </div>
         <div>
-            <label>Password : <input type="password" th:field="*{password}" class="form-control"></label>
+            <label>Password : <input type="password" th:field="*{password}" class="form-control"/></label>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</p>
         </div>
         <div>
             <label>Please re-enter password: <input type="password" th:field="*{passwordCheck}"
-                                                    class="form-control"></label>
+                                                    class="form-control"/></label>
             <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Reentered password
                 incorrect </p>
         </div>

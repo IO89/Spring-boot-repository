@@ -17,7 +17,7 @@ public class LibraryApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(BookRepository repository, CategoryRepository categoryRepository) {
+    public CommandLineRunner demo(BookRepository repository, CategoryRepository categoryRepository, UserRepository userRepository) {
         return (args) -> {
 
             categoryRepository.save(new Category("Sci-Fi"));

@@ -38,7 +38,12 @@ public class WebSecurityConfig {
 
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());//remove brackets?
+            auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+
+//            auth
+//                    .inMemoryAuthentication()
+//                    .withUser("user").password("password").roles("USER").and()
+//                    .withUser("admin").password("password").roles("ADMIN");
         }
 
 

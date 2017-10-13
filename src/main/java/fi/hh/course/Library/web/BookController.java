@@ -1,19 +1,20 @@
 package fi.hh.course.Library.web;
-import java.util.List;
-
-import java.util.ArrayList;
-
-import fi.hh.course.Library.domain.Category;
-import fi.hh.course.Library.domain.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 
 import fi.hh.course.Library.domain.Book;
 import fi.hh.course.Library.domain.BookRepository;
+import fi.hh.course.Library.domain.CategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @Controller
@@ -33,8 +34,8 @@ public class BookController {
 	}
 
     //Authorization
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @RequestMapping(value = "/addbook")
+//    @PreAuthorize("hasAnyAuthority('ADMIN')")
+	@RequestMapping(value = "/addbook")
     public String addBook(Model model){
 		model.addAttribute("book",new Book());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -73,7 +74,8 @@ public class BookController {
     //Adiing Login to Controller
     @RequestMapping(value = "/login")
     public String login() {
-        return "login";
+		System.out.print("Helooooooo");
+		return "login";
     }
 
 

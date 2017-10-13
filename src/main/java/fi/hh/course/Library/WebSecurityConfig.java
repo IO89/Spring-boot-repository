@@ -20,7 +20,7 @@ public class WebSecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .authorizeRequests().antMatchers("/css/**").permitAll()
+                    .authorizeRequests().antMatchers("/css*").permitAll()
                     .and()
                     .authorizeRequests().antMatchers("/signup", "saveuser").permitAll()
                     .and()

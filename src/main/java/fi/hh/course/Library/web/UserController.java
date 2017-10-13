@@ -20,6 +20,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+
     @RequestMapping(value = "signup")
     public String addUser(Model model) {
         model.addAttribute("signupform", new SignUpForm());
@@ -28,7 +29,7 @@ public class UserController {
 
     @RequestMapping(value = "saveuser", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("signupform") SignUpForm signupForm, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors()) {//chek for an error
+        if (!bindingResult.hasErrors()) {//check for an error
             if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) {//if password match with re entered pass
                 String pswd = signupForm.getPassword();
                 BCryptPasswordEncoder cryptedpswd = new BCryptPasswordEncoder();
@@ -57,5 +58,6 @@ public class UserController {
 
     }
 }
+
 
 

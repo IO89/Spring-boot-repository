@@ -19,62 +19,69 @@ import java.util.List;
 @Controller
 
 public class BookController {
-	@Autowired BookRepository repository;
+    @Autowired
+    BookRepository repository;
 
-	@Autowired CategoryRepository categoryRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
-	public void doSomething(){}
+    public void doSomething() {
+    }
 
-	@RequestMapping(value="/booklist")
-	public String booklist(Model model) {
-		List <Book> booklist= new ArrayList<Book>();
-		model.addAttribute("booklist",repository.findAll());
-		return "booklist";
-	}
+    @RequestMapping(value = "/booklist")
+    public String booklist(Model model) {
+        List<Book> booklist = new ArrayList<Book>();
+        model.addAttribute("booklist", repository.findAll());
+        return "booklist";
+    }
 
     //Authorization
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-	@RequestMapping(value = "/addbook")
-    public String addBook(Model model){
-		model.addAttribute("book",new Book());
+    @RequestMapping(value = "/addbook")
+    public String addBook(Model model) {
+        model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
-	}
+    }
 
-	@RequestMapping (value ="/save",method = RequestMethod.POST)
-	public String saveBook (Book book){
-		repository.save(book);
-		return "redirect:booklist";
-	}
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String deleteBook(@PathVariable("id") Long id, Model model){
-		repository.delete(id);
-		System.out.println("delete" + id);
-		return "redirect:../booklist";
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveBook(Book book) {
+        repository.save(book);
+        return "redirect:booklist";
+    }
 
-	}
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteBook(@PathVariable("id") Long id, Model model) {
+        repository.delete(id);
+        System.out.println("delete" + id);
+        return "redirect:../booklist";
 
-    //Adding restful service
+    }
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editBook(@PathVariable("id") Long id, Model model){
-        model.addAttribute("book",repository.findOne(id));
+    public String editBook(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("book", repository.findOne(id));
         model.addAttribute("category", categoryRepository.findAll());
         return "editbook";
     }
-	@RequestMapping(value = "/books",method = RequestMethod.GET)
-	public @ResponseBody List<Book> bookListREST(){
-		return (List<Book>)repository.findAll();
-	}
-	@RequestMapping(value = "/book/{id}",method = RequestMethod.GET)
-	public @ResponseBody Book findBookREST(@PathVariable("id") Long bookId){
-		return repository.findOne(bookId);
-	}
+
+    //Restful services get all books and get book by id
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Book> bookListREST() {
+        return (List<Book>) repository.findAll();
+    }
+
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    Book findBookREST(@PathVariable("id") Long bookId) {
+        return repository.findOne(bookId);
+    }
 
     //Adiing Login to Controller
     @RequestMapping(value = "/login")
     public String login() {
-		System.out.print("Helooooooo");
-		return "login";
+        return "login";
     }
 
 

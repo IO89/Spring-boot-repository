@@ -26,7 +26,7 @@ public class LibraryApplication {
 
             repository.save(new Book("TitleA", "AthourA", 1999, "ISBN1", 10, categoryRepository.findByCategoryName("Sci-Fi").get(0)));
             repository.save(new Book("TitileB", "AthourB", 1990, "ISBN2", 2, categoryRepository.findByCategoryName("Sci-Fi").get(0)));
-            //set up new user and amin
+            //set up new user and admin
 
             User user1 = new User("user", "$2a$06$1kpjLI1hyCZgurfQJjchV.fvwKCd4lpvAMxRA784YgG19dofbD.aC", "USER");
             User user2 = new User("admin", "$2a$06$prcCYpL64wteme13b8CApuS.LHha1rIuKLroXyvNMEXi636cNSPw.", "ADMIN");

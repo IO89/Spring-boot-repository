@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8">
-    <title>Sign up</title>
+    <title>Sign up form</title>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootsrap.min.cs}"/>
 </head>
 <body>
-<h1>Sign up</h1>
+<h1>Sign up form</h1>
 <div class="col-md-4">
     <form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
         <div>
-            <label>Username : <input type="text" th:field="*{username}" class="form-control"/></label>
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ivalid username</p>
+            <label>User name: <input type="text" th:field="*{username}" class="form-control"></label>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Wrong username</p>
         </div>
         <div>
-            <label>Password : <input type="password" th:field="*{password}" class="form-control"/></label>
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</p>
+            <label>Password: <input type="password" th:field="*{password}" class="form-control"> </label>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Wrong password</p>
         </div>
         <div>
-            <label>Please re-enter password: <input type="password" th:field="*{passwordCheck}"
-                                                    class="form-control"/></label>
-            <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Reentered password
-                incorrect </p>
+            <label>Re-enter password: <input type="password" th:field="*{passwordCheck}" class="form-control"></label>
+            <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password does not match</p>
         </div>
         <input type="submit" class="btn btn-success" value="Signup"/>
     </form>

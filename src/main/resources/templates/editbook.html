@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en"
 >
 <head>
-    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <!--<meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>-->
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}"/>
     <title>Edit book</title>
 </head>
 <body>
 <h1>Edit book</h1>
 <div>
-    <form th:object="${book}" th:action="@{../save}" action="#" method="post">
+    <form th:object="${book}" th:action="@{/save}" action="#" method="post">
         <input type="hidden" id="id" th:field="*{id}"/>
 
         <label for="title">Title</label>
@@ -29,7 +29,7 @@
 
         <label for="category">Category</label>
         <select id="category" th:field="*{category}">
-            <option th:each="category: ${categories}"
+            <option th:each="category: ${category}"
                     th:value="${category.categoryId}"
                     th:text="${category.categoryName}"></option>
         </select>

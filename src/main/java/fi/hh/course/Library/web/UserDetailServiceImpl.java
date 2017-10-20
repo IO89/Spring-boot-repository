@@ -11,18 +11,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final UserRepository repository;
 
     @Autowired
     public UserDetailServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        this.repository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User currentuser = userRepository.findByUsername(username);
-        UserDetails user = new org.springframework.security.core.userdetails.User(username, currentuser.getPasswordHash(),
-                AuthorityUtils.createAuthorityList(currentuser.getRole()));
+        User curruser = repository.findByUsername(username);
+        UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPasswordHash(),
+                AuthorityUtils.createAuthorityList(curruser.getRole()));
         return user;
     }
+
+
 }
+
+
+

@@ -16,10 +16,8 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
-
     @Autowired
-    private UserRepository userRepository;
-
+    private UserRepository repository;
 
     @RequestMapping(value = "signup")
     public String addUser(Model model) {
@@ -28,36 +26,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "saveuser", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("signupform") SignUpForm signupForm, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors()) {//check for an error
-            if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) {//if password match with re entered pass
-                String pswd = signupForm.getPassword();
-                BCryptPasswordEncoder cryptedpswd = new BCryptPasswordEncoder();
-                String hashPswd = cryptedpswd.encode(pswd);
+    public String save(@Valid @ModelAttribute("signupform") SignUpForm signUpForm, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            if (signUpForm.getPassword().equals(signUpForm.getPasswordCheck())) {
+                String pwd = signUpForm.getPassword();
+                BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+                String hashPwd = bc.encode(pwd);
 
                 User newUser = new User();
-                newUser.setPasswordHash(hashPswd);
-                newUser.setUsername(signupForm.getUsername());
+                newUser.setPasswordHash(hashPwd);
+                newUser.setUsername(signUpForm.getUsername());
                 newUser.setRole("USER");
-
-                if (userRepository.findByUsername(signupForm.getUsername()) == null) {//if available user name
-                    userRepository.save(newUser);
+                if (repository.findByUsername(signUpForm.getUsername()) == null) {
+                    repository.save(newUser);
                 } else {
-                    bindingResult.rejectValue("username", "err.username", "Username already registered");
+                    bindingResult.rejectValue("username", "err.username", "Username already exists");
                     return "signup";
                 }
             } else {
-                bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords are not identical");
+                bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match");
                 return "signup";
-
             }
         } else {
             return "signup";
         }
         return "redirect:/login";
-
     }
 }
-
-
-

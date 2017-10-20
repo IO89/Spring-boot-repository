@@ -20,8 +20,8 @@
         <label for="price">Price</label>
         <input type="text" id="price" th:field="*{price}"/>
         <label for="category">Category</label>
-        <select id="category" th:field="*{category}">
-            <option th:each="category:${categories}"
+        <select id="category" th:field="*{categories}">
+            <option th:each="category:${category}"
                     th:value="${category.categoryId}"
                     th:text="${category.categoryName}"></option>
         </select>

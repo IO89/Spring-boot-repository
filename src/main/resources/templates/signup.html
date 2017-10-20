@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org ">
 <head>
     <title>Sign up form</title>
-    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <!--<meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>-->
     <link type="text/css" rel="stylesheet" th:href="@{css/bootsrap.min.cs}"/>
 </head>
 <body>
@@ -10,15 +11,13 @@
 <div class="col-md-4">
     <form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
         <div>
-            <label>User name: <input type="text" th:field="*{username}" class="form-control"></label>
+            <label>User name: <input type="text" th:field="*{username}" class="form-control"/></label>
             <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Wrong username</p>
-        </div>
-        <div>
-            <label>Password: <input type="password" th:field="*{password}" class="form-control"> </label>
+
+            <label>Password: <input type="password" th:field="*{password}" class="form-control"/> </label>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Wrong password</p>
-        </div>
-        <div>
-            <label>Re-enter password: <input type="password" th:field="*{passwordCheck}" class="form-control"></label>
+
+            <label>Re-enter password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
             <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password does not match</p>
         </div>
         <input type="submit" class="btn btn-success" value="Signup"/>

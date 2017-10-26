@@ -40,7 +40,7 @@ public class BookController {
     @RequestMapping(value = "/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
-        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("category", categoryRepository.findAll());
         return "addbook";
     }
 

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"
->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link type="text/css" rel="stylesheet" href="css/bootsrap.css" th:href="@{css/bootstrap.css}"/>
-    <title>Add new book</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}"/>
+    <title>Add a book</title>
 </head>
 <body>
 <h1>Add a book</h1>
@@ -20,8 +19,10 @@
         <label for="price">Price</label>
         <input type="text" id="price" th:field="*{price}"/>
         <label for="category">Category</label>
-        <select id="category" th:field="*{categories}">
-            <option th:each="category:${category}"
+
+        <label for="category">Category</label>
+        <select id="category" th:field="*{category}">
+            <option th:each="category: ${category}"
                     th:value="${category.categoryId}"
                     th:text="${category.categoryName}"></option>
         </select>

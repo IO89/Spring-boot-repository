@@ -24,7 +24,7 @@ public class LibraryApplication {
             categoryRepository.save(new Category("Detective"));
             categoryRepository.save(new Category("Horror"));
 
-            repository.save(new Book("TitleA", "AthourA", 1999, "ISBN1", 10, categoryRepository.findByCategoryName("Sci-Fi").get(0)));
+            repository.save(new Book("TitleA", "Minh", 1999, "ISBN1", 10, categoryRepository.findByCategoryName("Sci-Fi").get(0)));
             repository.save(new Book("TitileB", "AthourB", 1990, "ISBN2", 2, categoryRepository.findByCategoryName("Sci-Fi").get(0)));
             //set up new user and admin
 
